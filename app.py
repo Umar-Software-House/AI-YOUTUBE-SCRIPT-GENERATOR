@@ -137,7 +137,7 @@ with st.sidebar:
     st.markdown(
         "Powered by **Groq LLaMA 3.3** (Free)  \n"
         "Built by **Muhammad Umar Malik**  \n"
-        "[GitHub](https://github.com/muhammadumarmalik) · "
+        "[GitHub](https://github.com/Umar-Software-House) · "
         "[Portfolio](https://muhammadumarmalik.me)"
     )
 
