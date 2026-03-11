@@ -1,0 +1,42 @@
+# ── Environment variables ──────────────────────────────────────────────────────
+.env
+
+# ── Python cache ───────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+venv/
+env/
+.venv/
+.env/
+ENV/
+
+# ── Egg / dist / build ─────────────────────────────────────────────────────────
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── IDE / Editor files ─────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── OS generated files ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Generated output files ─────────────────────────────────────────────────────
+output_script_*.txt
+
+# ── Pytest / coverage ──────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
