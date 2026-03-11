@@ -110,31 +110,29 @@ Author: Muhammad Umar Malik | github.com/Umar-Software-House
 """
 
 
+# ── Load API key from backend (secrets or env) ─────────────────────────────────
+api_key_input = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY", ""))
+
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.image(
         "https://img.icons8.com/color/96/youtube-play.png",
         width=80,
     )
-    st.markdown("### ⚙️ Configuration")
+    st.markdown("## 🎬 AI YouTube Script Generator")
     st.markdown("---")
-
-    # API key input — prefer Streamlit secrets, then env variable, allow manual override
-    env_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY", ""))
-    api_key_input = st.text_input(
-        "Groq API Key (FREE)",
-        value=env_key,
-        type="password",
-        help="Your free API key from console.groq.com/keys",
-        placeholder="gsk_xxxxxxxxxxxxxxxx",
+    st.markdown(
+        "Generate complete YouTube content packages in seconds:\n\n"
+        "✅ 5 Click-worthy Titles\n\n"
+        "✅ SEO-Optimised Description\n\n"
+        "✅ 10 Trending Hashtags\n\n"
+        "✅ Full Video Script"
     )
-
     st.markdown("---")
-    st.markdown("**How to get a FREE Groq API key:**")
-    st.markdown("1. Go to [console.groq.com](https://console.groq.com)")
-    st.markdown("2. Sign in / Sign up (100% Free)")
-    st.markdown("3. Click **API Keys** → **Create API Key**")
-    st.markdown("4. Copy and paste it above")
+    st.markdown("**How to use:**")
+    st.markdown("1. Enter your video topic below")
+    st.markdown("2. Click **Generate Content**")
+    st.markdown("3. Copy or download results")
     st.markdown("---")
     st.markdown(
         "Powered by **Groq LLaMA 3.3** (Free)  \n"
@@ -164,7 +162,7 @@ generate_btn = st.button("🚀 Generate Content", type="primary", use_container_
 # ── Generation logic ───────────────────────────────────────────────────────────
 if generate_btn:
     if not api_key_input:
-        st.error("❌ Please enter your Groq API key in the sidebar before generating.")
+        st.error("❌ Service temporarily unavailable. Please try again later.")
         st.stop()
 
     if not topic.strip():
@@ -195,13 +193,12 @@ if generate_btn:
             st.error(f"❌ An error occurred: {e}")
             st.info(
                 "Common causes:\n"
-                "- Invalid or expired API key\n"
-                "- Get a FREE key at: https://console.groq.com/keys\n"
-                "- Network connection issue"
+                "- Network connection issue\n"
+                "- AI service temporarily busy — please try again"
             )
             st.stop()
 
-    st.success("✅ All content generated successfully!")
+    st.success("✅ All Content generated successfully!")
 
     # ── Display results in tabs ────────────────────────────────────────────────
     tab1, tab2, tab3, tab4 = st.tabs(
