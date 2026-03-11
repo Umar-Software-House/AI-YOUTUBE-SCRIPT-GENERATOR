@@ -119,8 +119,8 @@ with st.sidebar:
     st.markdown("### ⚙️ Configuration")
     st.markdown("---")
 
-    # API key input — prefer env variable, allow manual override
-    env_key = os.getenv("GROQ_API_KEY", "")
+    # API key input — prefer Streamlit secrets, then env variable, allow manual override
+    env_key = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY", ""))
     api_key_input = st.text_input(
         "Groq API Key (FREE)",
         value=env_key,
@@ -139,7 +139,7 @@ with st.sidebar:
     st.markdown(
         "Powered by **Groq LLaMA 3.3** (Free)  \n"
         "Built by **Muhammad Umar Malik**  \n"
-        "[GitHub](https://github.com/Umar-Software-House) · "
+        "[GitHub](https://github.com/muhammadumarmalik) · "
         "[Portfolio](https://muhammadumarmalik.me)"
     )
 
