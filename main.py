@@ -9,7 +9,7 @@ import os
 import sys
 from datetime import datetime
 from dotenv import load_dotenv
-from openai import OpenAI
+from groq import Groq
 
 from script_generator import generate_script
 from title_generator import generate_titles, generate_description
@@ -19,18 +19,18 @@ from hashtag_generator import generate_hashtags
 load_dotenv()
 
 
-def get_openai_client() -> OpenAI:
+def get_groq_client() -> Groq:
     """
-    Initialise and return an authenticated OpenAI client.
+    Initialise and return an authenticated Groq client.
     Exits with a helpful error message if the API key is missing.
     """
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
-        print("\n❌  ERROR: OPENAI_API_KEY not found.")
-        print("   Please copy .env.example to .env and add your OpenAI API key.")
-        print("   Example:  OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx\n")
+        print("\n❌  ERROR: GROQ_API_KEY not found.")
+        print("   Please copy .env.example to .env and add your Groq API key.")
+        print("   Get a FREE key at: https://console.groq.com/keys\n")
         sys.exit(1)
-    return OpenAI(api_key=api_key)
+    return Groq(api_key=api_key)
 
 
 def print_banner() -> None:
@@ -40,7 +40,7 @@ def print_banner() -> None:
 ║          🎬  AI YouTube Script Generator  🎬                 ║
 ║                                                              ║
 ║   Generate Scripts · Titles · Descriptions · Hashtags       ║
-║   Powered by OpenAI  |  Built by Muhammad Umar Malik         ║
+║   Powered by Groq (Free)  |  Built by Muhammad Umar Malik    ║
 ╚══════════════════════════════════════════════════════════════╝
 """
     print(banner)
@@ -121,8 +121,8 @@ def main() -> None:
     print("\n⏳  Connecting to OpenAI and generating your content...")
     print("    (This may take 20-40 seconds depending on your connection)\n")
 
-    # ── Initialise OpenAI client ───────────────────────────────────────────────
-    client = get_openai_client()
+    # ── Initialise Groq client ─────────────────────────────────────────────────
+    client = get_groq_client()
 
     # ── Generate all content ───────────────────────────────────────────────────
     print("🔄  [1/4] Generating YouTube titles...")

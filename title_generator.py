@@ -1,18 +1,18 @@
 """
 title_generator.py
-Generates YouTube video titles and a video description using OpenAI API.
+Generates YouTube video titles and a video description using Groq API (Free).
 """
 
-from openai import OpenAI
+from groq import Groq
 
 
-def generate_titles(topic: str, client: OpenAI) -> str:
+def generate_titles(topic: str, client: Groq) -> str:
     """
     Generate 5 YouTube title ideas for the given topic.
 
     Args:
         topic: The subject for the video.
-        client: An authenticated OpenAI client instance.
+        client: An authenticated Groq client instance.
 
     Returns:
         A formatted string containing 5 YouTube title options.
@@ -32,7 +32,7 @@ Return only the numbered list of titles. No extra commentary.
 """
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="llama-3.3-70b-versatile",
         messages=[
             {
                 "role": "system",
@@ -47,13 +47,13 @@ Return only the numbered list of titles. No extra commentary.
     return response.choices[0].message.content.strip()
 
 
-def generate_description(topic: str, client: OpenAI) -> str:
+def generate_description(topic: str, client: Groq) -> str:
     """
     Generate an SEO-optimised YouTube video description for the given topic.
 
     Args:
         topic: The subject for the video.
-        client: An authenticated OpenAI client instance.
+        client: An authenticated Groq client instance.
 
     Returns:
         A formatted YouTube video description as a string.
@@ -75,7 +75,7 @@ Use plain text only. No markdown symbols.
 """
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="llama-3.3-70b-versatile",
         messages=[
             {
                 "role": "system",

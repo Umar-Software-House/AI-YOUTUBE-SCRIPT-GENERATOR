@@ -1,19 +1,18 @@
 """
 script_generator.py
-Generates a full YouTube documentary-style script using OpenAI API.
+Generates a full YouTube documentary-style script using Groq API (Free).
 """
 
-from openai import OpenAI
-import os
+from groq import Groq
 
 
-def generate_script(topic: str, client: OpenAI) -> str:
+def generate_script(topic: str, client: Groq) -> str:
     """
     Generate a YouTube documentary script for the given topic.
 
     Args:
         topic: The subject for the video script.
-        client: An authenticated OpenAI client instance.
+        client: An authenticated Groq client instance.
 
     Returns:
         A formatted YouTube script as a string.
@@ -35,7 +34,7 @@ Format the output clearly with section headers in UPPERCASE followed by a colon.
 """
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="llama-3.3-70b-versatile",
         messages=[
             {
                 "role": "system",

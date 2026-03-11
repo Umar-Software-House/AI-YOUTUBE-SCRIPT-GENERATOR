@@ -1,18 +1,18 @@
 """
 hashtag_generator.py
-Generates YouTube hashtags using OpenAI API.
+Generates YouTube hashtags using Groq API (Free).
 """
 
-from openai import OpenAI
+from groq import Groq
 
 
-def generate_hashtags(topic: str, client: OpenAI) -> str:
+def generate_hashtags(topic: str, client: Groq) -> str:
     """
     Generate 10 YouTube hashtags for the given topic.
 
     Args:
         topic: The subject for the video.
-        client: An authenticated OpenAI client instance.
+        client: An authenticated Groq client instance.
 
     Returns:
         A formatted string of 10 hashtags.
@@ -33,7 +33,7 @@ Return only the hashtags. No extra commentary or numbering.
 """
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="llama-3.3-70b-versatile",
         messages=[
             {
                 "role": "system",

@@ -11,7 +11,7 @@ import os
 from datetime import datetime
 import streamlit as st
 from dotenv import load_dotenv
-from openai import OpenAI
+from groq import Groq
 
 from script_generator import generate_script
 from title_generator import generate_titles, generate_description
@@ -74,9 +74,9 @@ st.markdown(
 )
 
 
-def get_openai_client(api_key: str) -> OpenAI:
-    """Return an authenticated OpenAI client using the provided key."""
-    return OpenAI(api_key=api_key)
+def get_groq_client(api_key: str) -> Groq:
+    """Return an authenticated Groq client using the provided key."""
+    return Groq(api_key=api_key)
 
 
 def build_download_content(
@@ -120,23 +120,24 @@ with st.sidebar:
     st.markdown("---")
 
     # API key input — prefer env variable, allow manual override
-    env_key = os.getenv("OPENAI_API_KEY", "")
+    env_key = os.getenv("GROQ_API_KEY", "")
     api_key_input = st.text_input(
-        "OpenAI API Key",
+        "Groq API Key (FREE)",
         value=env_key,
         type="password",
-        help="Your secret key from platform.openai.com/api-keys",
-        placeholder="sk-xxxxxxxxxxxxxxxx",
+        help="Your free API key from console.groq.com/keys",
+        placeholder="gsk_xxxxxxxxxxxxxxxx",
     )
 
     st.markdown("---")
-    st.markdown("**How to get an API key:**")
-    st.markdown("1. Go to [platform.openai.com](https://platform.openai.com)")
-    st.markdown("2. Sign in / Sign up")
-    st.markdown("3. Navigate to **API Keys**")
-    st.markdown("4. Click **Create new secret key**")
+    st.markdown("**How to get a FREE Groq API key:**")
+    st.markdown("1. Go to [console.groq.com](https://console.groq.com)")
+    st.markdown("2. Sign in / Sign up (100% Free)")
+    st.markdown("3. Click **API Keys** → **Create API Key**")
+    st.markdown("4. Copy and paste it above")
     st.markdown("---")
     st.markdown(
+        "Powered by **Groq LLaMA 3.3** (Free)  \n"
         "Built by **Muhammad Umar Malik**  \n"
         "[GitHub](https://github.com/Umar-Software-House) · "
         "[Portfolio](https://muhammadumarmalik.me)"
@@ -146,7 +147,7 @@ with st.sidebar:
 # ── Main UI ────────────────────────────────────────────────────────────────────
 st.markdown('<div class="main-title">🎬 AI YouTube Script Generator</div>', unsafe_allow_html=True)
 st.markdown(
-    '<div class="subtitle">Generate Scripts · Titles · Descriptions · Hashtags with AI</div>',
+    '<div class="subtitle">Generate Scripts · Titles · Descriptions · Hashtags — Powered by Groq (Free)</div>',
     unsafe_allow_html=True,
 )
 
@@ -163,14 +164,14 @@ generate_btn = st.button("🚀 Generate Content", type="primary", use_container_
 # ── Generation logic ───────────────────────────────────────────────────────────
 if generate_btn:
     if not api_key_input:
-        st.error("❌ Please enter your OpenAI API key in the sidebar before generating.")
+        st.error("❌ Please enter your Groq API key in the sidebar before generating.")
         st.stop()
 
     if not topic.strip():
         st.warning("⚠️ Please enter a topic before clicking Generate.")
         st.stop()
 
-    client = get_openai_client(api_key_input)
+    client = get_groq_client(api_key_input)
 
     with st.spinner("Generating your content — this usually takes 20-40 seconds..."):
         progress = st.progress(0, text="Starting...")
@@ -195,7 +196,7 @@ if generate_btn:
             st.info(
                 "Common causes:\n"
                 "- Invalid or expired API key\n"
-                "- Insufficient OpenAI credits\n"
+                "- Get a FREE key at: https://console.groq.com/keys\n"
                 "- Network connection issue"
             )
             st.stop()
